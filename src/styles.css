@@ -1,15 +1,10 @@
 .App {
-  font: 15px arial, sans-serif;
+  font: 12px arial, sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-}
-
-.number {
-  height: 100%;
-  font-size: large;
 }
 
 #selected {

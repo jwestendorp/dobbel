@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 export let rolldice = function(amount) {
+  // Returns an array of lenght 'amount' containing dice values
+
   let diceArray = [];
 
   for (var i = 0; i < amount; i += 1) {
@@ -12,6 +14,8 @@ export let rolldice = function(amount) {
 };
 
 class Pip extends React.Component {
+  // Component for diplaying dots on a die
+  // use emoji to dispay as pip icon
   constructor(props) {
     super(props);
   }
@@ -25,7 +29,7 @@ class Pip extends React.Component {
           width: "100%",
           height: "100%",
           textAlign: "center",
-          fontSize: "0.8rem"
+          fontSize: "3vw"
         }}
       >
         {this.props.pipIcon}
@@ -35,6 +39,9 @@ class Pip extends React.Component {
 }
 
 export class Die extends React.Component {
+  // takes a pip property (number from 1 to 6)
+  // and creates visual dice representation with <Pip> components
+
   constructor(props) {
     super(props);
   }
@@ -101,8 +108,8 @@ export class Die extends React.Component {
         style={{
           border: "solid black 1px",
           borderRadius: "10%",
-          width: "50px",
-          height: "50px",
+          width: "15vw",
+          height: "15vw",
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
           gridTemplateRows: "1fr 1fr 1fr",
