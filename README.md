@@ -5,4 +5,4 @@ for when you forget to bring dice but still want to play `dudo / perudo / liars 
 ## Installation
 
 * View in codesandbox
-* or use create-react-app 
+* or use [create-react-app](https://github.com/facebook/create-react-app)
