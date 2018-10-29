@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Die, rolldice } from "./dice.js";
+import { Settings } from "./settings.js";
 
 import "./styles.css";
 
@@ -14,9 +15,46 @@ class App extends React.Component {
   //   shows currently selected amount of dice to roll
   state = {
     dice: [6, 6, 6],
-    selected: 5
+    selected: 5,
+    pipSize: 3.3,
+    pipIcon: "⚪️",
+    color: "red",
+    displaySettings: 0
   };
+
+  // before initial render:
+  //check local storage for user settings
+  componentWillMount() {
+    // if a color setting exists in localStorage, setState to this color
+    if (localStorage.getItem("color")) {
+      console.log("storage", localStorage.getItem("color"));
+      this.setState({ color: localStorage.getItem("color") });
+    }
+    if (localStorage.getItem("pipIcon")) {
+      console.log("storage", localStorage.getItem("pipIcon"));
+      this.setState({ pipIcon: localStorage.getItem("pipIcon") });
+    }
+  }
+
   render() {
+    let changeColor = c => {
+      this.setState({ color: c });
+      console.log("change color: ", c);
+      //save settings to storage
+      localStorage.setItem("color", c);
+    };
+
+    let changePip = p => {
+      this.setState({ pipIcon: p });
+      console.log("change color: ", p);
+      //save settings to storage
+      localStorage.setItem("pipIcon", p);
+    };
+
+    let close = () => {
+      this.setState({ displaySettings: 0 });
+    };
+
     return (
       <div className="App">
         <div
@@ -26,6 +64,7 @@ class App extends React.Component {
           }}
         >
           <div
+            onClick={() => this.setState({ displaySettings: 1 })}
             id="dice"
             style={{
               display: "grid",
@@ -35,8 +74,15 @@ class App extends React.Component {
               paddingTop: "15px"
             }}
           >
-            {this.state.dice.map(d => <Die pips={d} pipIcon={"⚫️"} />)}
+            {this.state.dice.map(d => (
+              <Die
+                pips={d}
+                pipIcon={this.state.pipIcon}
+                color={this.state.color}
+              />
+            ))}
           </div>
+
           <div
             style={{
               position: "absolute",
@@ -116,6 +162,13 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        {this.state.displaySettings ? (
+          <Settings
+            changeColor={color => changeColor(color)}
+            changePip={color => changePip(color)}
+            close={() => close()}
+          />
+        ) : null}
       </div>
     );
   }

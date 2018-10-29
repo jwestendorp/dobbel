@@ -13,29 +13,25 @@ export let rolldice = function(amount) {
   return diceArray;
 };
 
-class Pip extends React.Component {
+export function Pip(props) {
   // Component for diplaying dots on a die
   // use emoji to dispay as pip icon
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
-    return (
-      <div
-        style={{
-          gridRowStart: this.props.r,
-          gridColumnStart: this.props.c,
-          width: "100%",
-          height: "100%",
-          textAlign: "center",
-          fontSize: "3vw"
-        }}
-      >
-        {this.props.pipIcon}
-      </div>
-    );
-  }
+  return (
+    <div
+      onClick={c => (props.onClick != undefined ? props.onClick(c) : null)}
+      style={{
+        gridRowStart: props.r,
+        gridColumnStart: props.c,
+        width: "100%",
+        height: "100%",
+        textAlign: "center",
+        fontSize: "3.3vw"
+      }}
+    >
+      {props.pipIcon}
+    </div>
+  );
 }
 
 export class Die extends React.Component {
@@ -114,7 +110,8 @@ export class Die extends React.Component {
           gridTemplateColumns: "1fr 1fr 1fr",
           gridTemplateRows: "1fr 1fr 1fr",
           background: "white",
-          padding: "2%"
+          padding: "2%",
+          background: this.props.color
         }}
       >
         {pips()}
